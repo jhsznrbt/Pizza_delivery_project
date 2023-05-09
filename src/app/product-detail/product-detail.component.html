@@ -1,1 +1,11 @@
-<p>product-detail works!</p>
+<div *ngIf="pizza" class="pizza-detail">
+  <div class="pizza-image">
+    <img [src]="'assets/images/' + pizza.image" alt="{{ pizza.name }}" />
+  </div>
+  <div class="pizza-info">
+    <h2>{{ pizza.name }}</h2>
+    <p>{{ pizza.description }}</p>
+    <p class="price">{{ pizza.price }} Ft</p>
+    <button class="order-button">Rendelés</button>
+  </div>
+</div>

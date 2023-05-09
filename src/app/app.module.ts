@@ -9,6 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './register/register.component';
 import {HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import {PizzaService} from "./pizza.service";
+import { UpdatePizzaComponent } from './update-pizza/update-pizza.component';
+import { AddPizzaComponent } from './add-pizza/add-pizza.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AdminComponent,
     RegistrationComponent,
     DashboardComponent,
+    ProductDetailComponent,
+    UpdatePizzaComponent,
+    AddPizzaComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +33,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [PizzaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

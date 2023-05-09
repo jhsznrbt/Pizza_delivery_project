@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000';
-
+  public userEmail: string | null = null;
   constructor(private http: HttpClient) {}
 
   register(user: any): Observable<any> {
@@ -21,6 +21,7 @@ export class AuthService {
         tap((response: { token?: string }) => {
           if (response && response.token) {
             localStorage.setItem('token', response.token);
+            this.userEmail = user.email;
           } else {
             throw new Error('Sikertelen bejelentkezés');
           }
@@ -31,6 +32,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    this.userEmail = null;  // Bejelentkezett felhasználó email címének törlése
   }
 
   isLoggedIn(): boolean {

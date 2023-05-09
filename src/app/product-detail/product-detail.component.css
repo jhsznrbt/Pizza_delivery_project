@@ -1,0 +1,48 @@
+.pizza-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.pizza-image {
+  flex: 0 0 40%;
+  margin-right: 20px;
+}
+
+.pizza-image img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.pizza-info {
+  flex: 1;
+}
+
+.pizza-info h2 {
+  margin-top: 0;
+}
+
+.price {
+  font-size: 1.5em;
+  color: #f57c00;
+}
+
+.order-button {
+  background-color: #f57c00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}

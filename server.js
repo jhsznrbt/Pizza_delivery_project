@@ -20,25 +20,37 @@ const pizzaSchema = new mongoose.Schema({
 
 const Pizza = mongoose.model('Pizza', pizzaSchema);
 
-// Example API endpoint to query pizza data
 app.get('/api/pizzas', async (req, res) => {
   const pizzas = await Pizza.find();
   res.json(pizzas);
 });
 
+app.get('/api/pizzas/:id', async (req, res) => {
+  const pizza = await Pizza.findById(req.params.id);
+  res.json(pizza);
+});
+
+
+// let pizzas = [
+//   {
+//     id: '1',
+//     name: 'Pepperoni Pizza',
+//     description: 'Finom, fűszeres pepperoni szalámi, mozzarella sajt, paradicsomszósz.',
+//     price: 2500,
+//     image: 'pepperoni.jpg'
+//   },
+//   {
+//     id: '2',
+//     name: 'Margherita Pizza',
+//     description: 'Friss paradicsom, bazsalikom, mozzarella sajt, olívaolaj.',
+//     price: 2000,
+//     image: 'margherita.jpg'
+//   }
+// ];
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});
-
-app.post('/login', async (req, res) => {
-  try {
-    const user = req.body;
-    // You can continue processing the login data, such as querying from the database
-    res.status(200).json({ message: 'Bejelentkezés sikeres!' });
-  } catch (error) {
-    res.status(400).json({ error: 'Bejelentkezés hiba!' });
-  }
 });
 
 // User schema and model
@@ -64,18 +76,18 @@ app.post('/register', async (req, res) => {
 const jwt = require('jsonwebtoken');
 
 app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    // Itt ellenőrizzük a felhasználónevet és a jelszót.
-    const user = await User.findOne({ username });
+    // Itt ellenőrizzük az emailt és a jelszót.
+    const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ message: 'Hibás felhasználónév vagy jelszó!' });
+      return res.status(400).json({ message: 'Hibás email cím vagy jelszó!' });
     }
 
     if (user.password !== password) {
-      return res.status(400).json({ message: 'Hibás felhasználónév vagy jelszó!' });
+      return res.status(400).json({ message: 'Hibás email cím vagy jelszó!' });
     }
 
     // A felhasználó hitelesítve lett, hozzuk létre a tokent.
@@ -88,8 +100,25 @@ app.post('/login', async (req, res) => {
 });
 
 
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
+db.once('open', async function() {
   console.log('Connected to the MongoDB database.');
+});
+
+app.put('/api/pizzas/:id', async (req, res) => {
+  const updatedPizza = await Pizza.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.json(updatedPizza);
+});
+
+
+app.post('/api/pizzas', async (req, res) => {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+
+  const newPizza = new Pizza(req.body);
+  const savedPizza = await newPizza.save();
+  res.json(savedPizza);
 });

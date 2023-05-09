@@ -1,1 +1,26 @@
-<p>admin works!</p>
+<div class="table-container">
+  <table>
+    <thead>
+    <tr>
+      <th>Név</th>
+      <th>Leírás</th>
+      <th>Ár</th>
+      <th>Akció</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pizza of pizzas">
+      <td>{{ pizza.name }}</td>
+      <td>{{ pizza.description }}</td>
+      <td>{{ pizza.price }}</td>
+      <td>
+        <button class="action-button delete-button" (click)="deletePizza(pizza._id)">Törlés</button>
+        <button class="action-button edit-button" (click)="selectedPizza = pizza">Módosítás</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button class="action-button edit-button" (click)="toggleAddPizzaModal()">Új pizza hozzáadása</button>
+</div>
+<app-add-pizza *ngIf="showAddPizzaModal" (added)="loadPizzas(); showAddPizzaModal = false"></app-add-pizza>
+<app-update-pizza *ngIf="selectedPizza" [pizza]="selectedPizza" (updated)="loadPizzas(); selectedPizza = null"></app-update-pizza>

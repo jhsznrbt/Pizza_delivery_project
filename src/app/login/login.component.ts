@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,11 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   user = {
-    username: '',
+    email: '',
     password: ''
   };
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,11 +24,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user).subscribe(
       response => {
         console.log('Bejelentkezés sikeres:', response);
-        // Sikeres bejelentkezés esetén végezhető teendők, pl. átirányítás
+        // Sikeres bejelentkezés esetén átirányítjuk a felhasználót a főoldalra
+        this.router.navigate(['/']);
       },
       error => {
         console.error('Bejelentkezés hiba:', error);
-        // Hibás bejelentkezés esetén végezhető teendők, pl. hibaüzenet megjelenítése
+        // Hibás bejelentkezés esetén megjelenítjük a hibát a felhasználónak
+        alert('Bejelentkezés hiba: ' + error.error.message);
       }
     );
   }}

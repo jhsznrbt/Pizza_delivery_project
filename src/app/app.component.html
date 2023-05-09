@@ -8,11 +8,16 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <nav class="menu">
   <a routerLink="/">Kezdőoldal</a>
-  <a routerLink="/login">Bejelentkezés</a>
-  <a routerLink="/register">Regisztráció</a>
-  <a routerLink="/admin">Admin</a>
+  <a routerLink="/login" *ngIf="!authService.isLoggedIn()">Bejelentkezés</a>
+  <a routerLink="/register" *ngIf="!authService.isLoggedIn()">Regisztráció</a>
+  <a routerLink="/admin" *ngIf="authService.isLoggedIn()">Admin</a>
+  <div *ngIf="authService.isLoggedIn()">
+    Bejelentkezve, mint: {{authService.userEmail}}
+    <button class="logout-button" (click)="authService.logout()">Kijelentkezés</button>
+  </div>
 </nav>
 <router-outlet></router-outlet>
+
 
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
