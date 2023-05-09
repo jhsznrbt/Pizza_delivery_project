@@ -1,0 +1,17 @@
+/* app.component.css */
+.menu {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.menu a {
+  color: #495057;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: #212529;
+}

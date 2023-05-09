@@ -1,0 +1,15 @@
+<!-- home.component.html -->
+<div class="container">
+  <h1 class="text-center">Pizza Delivery</h1>
+  <p class="text-center">Gyors és finom pizzát házhoz szállítunk, minden alkalomra!</p>
+
+  <div class="pizzas">
+    <div class="pizza-card" *ngFor="let pizza of pizzas">
+      <img [src]="'assets/images/' + pizza.image" alt="{{ pizza.name }}" />
+      <h2>{{ pizza.name }}</h2>
+      <p>{{ pizza.description }}</p>
+      <p class="price">{{ pizza.price }} Ft</p>
+      <button class="order-button">Rendelés</button>
+    </div>
+  </div>
+</div>
