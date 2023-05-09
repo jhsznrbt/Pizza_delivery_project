@@ -61,31 +61,32 @@ app.post('/register', async (req, res) => {
   }
 });
 
+const jwt = require('jsonwebtoken');
+
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Search for a user with the given username
+    // Itt ellenőrizzük a felhasználónevet és a jelszót.
     const user = await User.findOne({ username });
 
-    // If no user is found, or the password doesn't match, send an error
-    if (!user || user.password !== password) {
+    if (!user) {
       return res.status(400).json({ message: 'Hibás felhasználónév vagy jelszó!' });
     }
 
-    // If the username and password match, the login is successful
-    res.status(200).json({ message: 'Sikeres bejelentkezés!' });
+    if (user.password !== password) {
+      return res.status(400).json({ message: 'Hibás felhasználónév vagy jelszó!' });
+    }
+
+    // A felhasználó hitelesítve lett, hozzuk létre a tokent.
+    const token = jwt.sign({ _id: user._id }, 'your_secret_key');
+
+    res.status(200).json({ message: 'Sikeres bejelentkezés!', token });
   } catch (error) {
     res.status(500).json({ message: 'A bejelentkezés során hiba történt.' });
   }
 });
 
-
-// const DB_URI = 'mongodb://localhost:27017/pizza-delivery';
-// mongoose.connect(DB_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

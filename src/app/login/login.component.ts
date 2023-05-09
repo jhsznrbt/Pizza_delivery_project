@@ -30,10 +30,5 @@ export class LoginComponent implements OnInit {
         // Hibás bejelentkezés esetén végezhető teendők, pl. hibaüzenet megjelenítése
       }
     );
-  }
+  }}
 
-  login(): void {
-    // Ide írd a bejelentkezési kódod
-    this.authService.login(this.user);
-  }
-}

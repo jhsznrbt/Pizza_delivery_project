@@ -8,6 +8,7 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { AuthGuard } from './auth.guard';
+import { DashboardComponent} from "./dashboard/dashboard.component";
 
 // AuthGuard importálása
 // import { authGuard } from './auth.guard';
@@ -18,8 +19,8 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'product/:id', component: ProductDetailComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]
-  }
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 
 ];
 

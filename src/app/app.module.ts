@@ -8,6 +8,7 @@ import { AdminComponent } from './admin/admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './register/register.component';
 import {HttpClientModule} from "@angular/common/http";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {HttpClientModule} from "@angular/common/http";
     LoginComponent,
     AdminComponent,
     RegistrationComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
