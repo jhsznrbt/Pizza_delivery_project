@@ -14,3 +14,4 @@
 * A backenddel való kommunikáció elemei ki vannak szervezve service-ekbe
 Van authguard, amely védi a login, register utáni route-okat és az admin felületét
 
+A backend, az ExpressJS a `server.js` fájlba van kiszervezve.
